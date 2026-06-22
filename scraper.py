@@ -59,13 +59,21 @@ async def get_authenticated_context(browser: Browser) -> BrowserContext:
     return context
 
 
-async def run() -> None:
+async def run(distance_miles:int = 3) -> None:
+    miles_options = [1,3,5,7,10,15,20,30,40,50]
+
+    if distance_miles not in miles_options:
+        print("Not a distance option")
+        print(miles_options)
+
     async with async_playwright() as p:
         browser = await create_browser(p)
         context = await get_authenticated_context(browser)
 
+        TARGET_URL = f"https://nextdoor.com/for_sale_and_free/?isFree=true&distance=distance_{distance_miles}_mi"
+
         page = await context.new_page()
-        await page.goto("https://nextdoor.com")
+        await page.goto(TARGET_URL)
 
         input("Press Enter to close...")
         await browser.close()
