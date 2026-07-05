@@ -1,3 +1,12 @@
+# Credentials & session
 .env
-venv/
 cookies.json
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
